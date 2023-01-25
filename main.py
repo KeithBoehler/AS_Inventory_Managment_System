@@ -29,8 +29,8 @@ def main() -> int:
     CumulativeDictionary = {}
     Cont = True
     while Cont is True:
-        Barcode = input("Scan barcode:  ").strip("\t")
-        if Barcode != 's' or 'p':
+        Barcode = input("Scan barcode:  ")
+        if Barcode == 's' or 'p':
             pass
         CumulativeDictionary = dictionary_update(CumulativeDictionary, Barcode)
         print(CumulativeDictionary)
