@@ -1,14 +1,16 @@
 # Keith Boehler, 23 Jan 2023
 import sys
+import os
+from pprint import pprint
+import csv
 
-
-'''
-Purpose: Check if a scanned barcode is unique or increment counter.
-Precondition: Decalred empty or loaded dictionary.
-Postcondition: Dictionary has new entry or existing entry in incement by one.
-Bugs: 
-'''
 def dictionary_update(WorkingDict: dict, NewScan: str) -> dict:
+    '''
+    Purpose: Check if a scanned barcode is unique or increment counter.
+    Precondition: Decalred empty or loaded dictionary.
+    Postcondition: Dictionary has new entry or existing entry in incement by one.
+    Bugs: Does take enter input as argument.
+    '''
     if NewScan not in WorkingDict.keys():
         TmpDict = {NewScan : 1}
         WorkingDict.update(TmpDict)
@@ -22,17 +24,18 @@ def main() -> int:
     Cont = True
     while Cont is True:
         Barcode = input("Scan barcode:  ")
-        if Barcode == 's':
-            pass
+        if Barcode == 'w':
+            SavePath = os.getcwd() + "/data/out.csv"
+            CSVHandle = csv.writer(open(SavePath, "w"))
+            for Key, Val in CumulativeDictionary.items():
+                CSVHandle.writerow([Key, Val])
         elif Barcode == 'p':
-            pass 
+            pprint(CumulativeDictionary, depth=2, indent=4) 
         elif Barcode == 'q':
             sys.exit("Closing program... ")
-        else: 
-            print("Unreadable barcode or invalid menu option.")
-        CumulativeDictionary = dictionary_update(CumulativeDictionary, Barcode)
-        print(CumulativeDictionary)
-    print("Done!")
+        else:
+            CumulativeDictionary = dictionary_update(CumulativeDictionary, Barcode)
+    
     return 0
 
 # Press the green button in the gutter to run the script.
