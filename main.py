@@ -1,7 +1,6 @@
 # Keith Boehler, 23 Jan 2023
 import sys
 import os
-from pprint import pprint
 import csv
 
 def dictionary_update(WorkingDict: dict, NewScan: str) -> dict:
@@ -18,9 +17,28 @@ def dictionary_update(WorkingDict: dict, NewScan: str) -> dict:
         WorkingDict[NewScan] = WorkingDict[NewScan] + 1
     return WorkingDict
 
+
+def peek_dictionary(Dicts: dict) -> None:
+    '''
+    Purpose: Reusing of loops to print dictionarys.
+    Precondition: A dictionary is loaded with data.
+    Postcondition: No return. Just nice (debatable) format terminal output of dictionary.
+    Bugs: 
+    '''
+    for Keys, Values in Dicts.items():
+        print(Keys, Values)
+    print("\n")
+
+
 def main() -> int:
     print("Starting... ")
     CumulativeDictionary = {}
+    MenuOptions = {"Show menu again: ": "m",
+                   "Show scans: ": "p",
+                   "Write to csv file: ": "w",
+                   "Exit program: ": "q"
+                    }
+    peek_dictionary(MenuOptions)
     Cont = True
     while Cont is True:
         Barcode = input("Scan barcode:  ")
@@ -30,9 +48,14 @@ def main() -> int:
             for Key, Val in CumulativeDictionary.items():
                 CSVHandle.writerow([Key, Val])
         elif Barcode == 'p':
-            pprint(CumulativeDictionary, depth=2, indent=4) 
+            print("\n")
+            print("Barcode: Amount")
+            peek_dictionary(CumulativeDictionary) 
         elif Barcode == 'q':
             sys.exit("Closing program... ")
+        elif Barcode == 'm':
+            print("\n")
+            peek_dictionary(MenuOptions)
         else:
             CumulativeDictionary = dictionary_update(CumulativeDictionary, Barcode)
     
