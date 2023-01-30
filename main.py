@@ -1,13 +1,16 @@
 # Keith Boehler, 23 Jan 2023
-
+import sys
 '''
 Purpose:  
 Precondition: 
 Postcondition: 
 Bugs: 
 '''
-def menu_options(KeybordInput: str):
-    pass
+def menu_options(KeybordInput: str) -> bool:
+    if KeybordInput == 's':
+        pass #save_scans()
+    elif KeybordInput == 'q':
+        return False #sys.exit("Exiting program... ")
 
 
 '''
@@ -30,9 +33,10 @@ def main() -> int:
     Cont = True
     while Cont is True:
         Barcode = input("Scan barcode:  ")
-        if Barcode == 's' or 'p':
-            pass
-        CumulativeDictionary = dictionary_update(CumulativeDictionary, Barcode)
+        if Barcode == 's' or Barcode == 'p' or Barcode == 'q':
+            Cont = menu_options(Barcode)
+        else:
+            CumulativeDictionary = dictionary_update(CumulativeDictionary, Barcode)
         print(CumulativeDictionary)
     print("Done!")
     return 0
