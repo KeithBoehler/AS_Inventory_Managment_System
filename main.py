@@ -44,9 +44,11 @@ def main() -> int:
         Barcode = input("Scan barcode:  ")
         if Barcode == 'w':
             SavePath = os.getcwd() + "/data/out.csv"
-            CSVHandle = csv.writer(open(SavePath, "w"))
-            for Key, Val in CumulativeDictionary.items():
-                CSVHandle.writerow([Key, Val])
+            with open(SavePath, 'w') as CSVHandle:
+                Writer = csv.writer(CSVHandle)
+                for Row in CumulativeDictionary.items():
+                    Writer.writerow(Row)
+            CSVHandle.close()
         elif Barcode == 'p':
             print("\n")
             print("Barcode: Amount")
