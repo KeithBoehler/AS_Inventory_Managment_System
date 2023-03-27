@@ -1,4 +1,4 @@
-# Deadman's Inventory Counter
+# AS_Inventory_Managment_System
 
 ## Motivation
 I want to be able to scan diffrent barcodes and a total at the end. If a new barcode is scanned then, it should be added to the dictionary; otherwise a simple increment. 
